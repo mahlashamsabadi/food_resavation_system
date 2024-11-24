@@ -71,7 +71,7 @@
 
     <c:if test="${empty user}">
         <div>
-            <form action=/home/login" method="GET">
+            <form action="/home/login" method="GET">
                 <button type="submit">Login</button>
             </form>
         </div>
