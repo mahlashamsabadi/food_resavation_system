@@ -210,6 +210,7 @@
             }),
             success: function (response) {
                 alert('Reservation created successfully!');
+                window.location.reload();
             },
         });
     }
