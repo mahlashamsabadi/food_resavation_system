@@ -4,9 +4,10 @@ import jakarta.persistence.*;
 
 @Entity
 public class Contact {
+
     private long id;
     private String value;
-    private Long contactTypeId;
+    private ContactType contactType;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contact_seq")
@@ -19,7 +20,6 @@ public class Contact {
         this.id = id;
     }
 
-
     public String getValue() {
         return value;
     }
@@ -28,14 +28,13 @@ public class Contact {
         this.value = value;
     }
 
-    @Basic
-    @Column(name = "CONTACT_TYPE_ID")
-    public Long getContactTypeId() {
-        return contactTypeId;
+    @ManyToOne
+    @JoinColumn(name = "CONTACT_TYPE_ID", nullable = false)
+    public ContactType getContactType() {
+        return contactType;
     }
 
-    public void setContactTypeId(Long contactTypeId) {
-        this.contactTypeId = contactTypeId;
+    public void setContactType(ContactType contactType) {
+        this.contactType = contactType;
     }
-
 }

@@ -56,8 +56,19 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     @Transactional
     public void delete(Long reservationId) {
-        Optional<Reservation> reservation = reservationRepository.findById(reservationId);
-        reservation.ifPresent(value -> reservationRepository.delete(value));
+        Optional<Reservation> reservationById = reservationRepository.findById(reservationId);
+        if (reservationById.isPresent()) {
+            Reservation reservation = reservationById.get();
+            reservation.setDisableDate(new Date());
+            reservationRepository.save(reservation);
+            Meal meal = reservation.getMeal();
+            meal.setInventory(meal.getInventory() + 1);
+        }
+    }
+
+    @Override
+    public List<Reservation> findByUserIdAndStatus(Long userId, String status) {
+        return reservationRepository.findByUserIdAndStatus(userId, status);
     }
 
 }

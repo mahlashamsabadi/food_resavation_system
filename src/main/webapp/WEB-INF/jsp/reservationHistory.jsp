@@ -64,7 +64,7 @@
     }
 
     function redirectToPaymentPage(userId) {
-        window.location.href = '/payment?userId=' + userId;
+        window.location.href = '/payment/' + userId;
     }
 
 </script>

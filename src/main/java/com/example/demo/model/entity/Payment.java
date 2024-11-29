@@ -8,6 +8,7 @@ import java.sql.Date;
 public class Payment {
     private long id;
     private long reservationId;
+    private long userId;
     private int amount;
     private Date paymentDate;
     private String paymentMethod;
@@ -95,4 +96,13 @@ public class Payment {
         this.modificationDate = updatedAt;
     }
 
+    @Basic
+    @Column(name = "USER_ID")
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
 }

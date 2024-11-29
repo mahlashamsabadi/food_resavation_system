@@ -9,6 +9,9 @@ import java.util.List;
 
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
+
+    List<Reservation> findByUserIdAndStatus(Long userId, String status);
+
     @Query(name = "Reservation.FIND_ALL_BY_USER_ID")
     List<Reservation> findByUserId(Long userId);
 }

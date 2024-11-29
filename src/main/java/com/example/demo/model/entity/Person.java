@@ -2,14 +2,16 @@ package com.example.demo.model.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Person {
     private long id;
     private String fullName;
     private String nationalCode;
     private Long userId;
-    private Long contactId;
-    private Long addressId;
+    private List<Contact> contacts;
+    private List<Address> addresses;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "person_seq")
@@ -22,9 +24,6 @@ public class Person {
         this.id = id;
     }
 
-
-    @Basic
-    @Column(name = "FULL_NAME")
     public String getFullName() {
         return fullName;
     }
@@ -32,7 +31,6 @@ public class Person {
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
-
 
     public String getNationalCode() {
         return nationalCode;
@@ -42,7 +40,6 @@ public class Person {
         this.nationalCode = nationalCode;
     }
 
-    @Basic
     @Column(name = "USER_ID")
     public Long getUserId() {
         return userId;
@@ -52,24 +49,31 @@ public class Person {
         this.userId = userId;
     }
 
-    @Basic
-    @Column(name = "CONTACT_ID")
-    public Long getContactId() {
-        return contactId;
+    @ManyToMany
+    @JoinTable(
+            name = "person_contact",
+            joinColumns = @JoinColumn(name = "person_id"),
+            inverseJoinColumns = @JoinColumn(name = "contact_id")
+    )
+    public List<Contact> getContacts() {
+        return contacts;
     }
 
-    public void setContactId(Long contactId) {
-        this.contactId = contactId;
+    public void setContacts(List<Contact> contacts) {
+        this.contacts = contacts;
     }
 
-    @Basic
-    @Column(name = "ADDRESS_ID")
-    public Long getAddressId() {
-        return addressId;
+    @ManyToMany
+    @JoinTable(
+            name = "person_address",
+            joinColumns = @JoinColumn(name = "person_id"),
+            inverseJoinColumns = @JoinColumn(name = "address_id")
+    )
+    public List<Address> getAddresses() {
+        return addresses;
     }
 
-    public void setAddressId(Long addressId) {
-        this.addressId = addressId;
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
     }
-
 }

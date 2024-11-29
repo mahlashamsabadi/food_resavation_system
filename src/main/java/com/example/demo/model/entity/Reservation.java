@@ -20,6 +20,7 @@ public class Reservation {
     private Long totalPrice;
     private Date creationDate;
     private Date modificationDate;
+    private Date disableDate;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reservation_seq")
@@ -110,4 +111,14 @@ public class Reservation {
         this.modificationDate = updatedAt;
     }
 
+
+    @Basic
+    @Column(name = "DISABLE_DATE", nullable = true)
+    public Date getDisableDate() {
+        return disableDate;
+    }
+
+    public void setDisableDate(Date disableDate) {
+        this.disableDate = disableDate;
+    }
 }
